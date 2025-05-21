@@ -18,7 +18,7 @@ load_dotenv()
 
 st.set_page_config(page_title="파일 업로드 + 헌법 Q&A 챗봇", layout="centered")
 
-st.header("업로드된 문서 기반 Q&A 챗봇")
+st.header("헌법 Q&A 챗봇 💬 📚")
 
 selected_model = st.selectbox("사용할 GPT 모델을 선택하세요:", ("gpt-4o", "gpt-3.5-turbo-0125"))
 
@@ -99,15 +99,15 @@ if uploaded_file:
     for msg in chat_history.messages:
         st.chat_message(msg.type).write(msg.content)
 
-    if prompt := st.chat_input("질문을 입력하세요"):
+    if prompt := st.chat_input("Your question"):
         st.chat_message("human").write(prompt)
         with st.chat_message("ai"):
-            with st.spinner("답변 생성 중..."):
+            with st.spinner("Thinking..."):
                 config = {"configurable": {"session_id": "upload_session"}}
                 response = conversational_chain.invoke({"input": prompt}, config)
                 answer = response["answer"]
                 st.write(answer)
 
-                with st.expander("참고한 문서 보기"):
+                with st.expander("참고 문서 확인"):
                     for doc in response.get("context", []):
                         st.markdown(f"{doc.metadata.get('source', '알 수 없음')}", help=doc.page_content)
