@@ -80,7 +80,7 @@ Use polite Korean."""),
     return rag_chain
 
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "업로드한 문서에 대해 궁금한 것을 질문해 주세요"}]
+    st.session_state["messages"] = [{"role": "assistant", "content": "헌법에 대해 무엇이든 물어보세요!"}]
 
 if uploaded_file:
     file_hash = get_file_hash(uploaded_file)
